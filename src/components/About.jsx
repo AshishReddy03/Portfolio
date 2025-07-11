@@ -1,68 +1,104 @@
 import React from "react";
 import { motion } from "framer-motion";
 
+// Floating stars (glowing dots)
+const FloatingStars = () =>
+  Array.from({ length: 40 }, (_, i) => (
+    <motion.span
+      key={i}
+      className="absolute bg-white rounded-full"
+      style={{
+        top: `${Math.random() * 100}%`,
+        left: `${Math.random() * 100}%`,
+        width: `${Math.random() * 2 + 1}px`,
+        height: `${Math.random() * 2 + 1}px`,
+        opacity: Math.random() * 0.3 + 0.3,
+        zIndex: 0,
+      }}
+      animate={{ y: [0, -10, 0], opacity: [0.3, 0.6, 0.3] }}
+      transition={{
+        duration: 4 + Math.random() * 4,
+        repeat: Infinity,
+        ease: "easeInOut",
+        delay: Math.random() * 3,
+      }}
+    />
+  ));
+
+// Background floating blobs
+const BackgroundBlobs = () => (
+  <>
+    <motion.div
+      className="absolute w-72 h-72 bg-purple-600/20 rounded-full blur-3xl top-[10%] left-[5%] z-0"
+      animate={{ y: [0, 20, 0], opacity: [0.4, 0.7, 0.4] }}
+      transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
+    />
+    <motion.div
+      className="absolute w-96 h-96 bg-blue-500/10 rounded-full blur-2xl top-[60%] right-[5%] z-0"
+      animate={{ y: [0, -30, 0], opacity: [0.4, 0.7, 0.4] }}
+      transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
+    />
+  </>
+);
+
 const About = () => {
   return (
     <section
       id="about"
-      className="min-h-screen px-6 py-20 bg-[#0d0d0d] text-white flex items-center"
+      className="relative min-h-screen px-6 py-24 bg-gradient-to-b from-[#0d0d0d] to-black text-white flex items-center overflow-hidden"
     >
-      <div className="max-w-5xl mx-auto space-y-8">
-        {/* Heading */}
-        <motion.h2
-          className="text-3xl font-bold text-blue-400 border-b border-blue-600 inline-block pb-1 font-mono"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-        >
-          About Me
-        </motion.h2>
+      {/* Background stars and blobs */}
+      <FloatingStars />
+      <BackgroundBlobs />
 
-        {/* Description */}
-        <motion.p
-          className="text-gray-300 text-lg leading-relaxed font-sans"
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          transition={{ delay: 0.2, duration: 0.6 }}
+      <div className="relative z-10 max-w-6xl mx-auto grid md:grid-cols-2 gap-10 items-center">
+        {/* Left: Description */}
+        <motion.div
+          initial={{ x: -50, opacity: 0 }}
+          whileInView={{ x: 0, opacity: 1 }}
+          transition={{ duration: 0.8 }}
         >
-          I’m a Computer Science graduate from{" "}
-          <span className="text-white">Anurag University</span>, based in
-          Hyderabad. With a CGPA of <span className="text-white">8.25</span>,
-          I’ve developed strong skills in full-stack development — particularly
-          using React and Node.js.
-          <br />I love crafting clean UIs, writing scalable backend code, and
-          learning new technologies that help turn ideas into real, working
-          products.
-        </motion.p>
+          <h2 className="text-4xl font-bold text-white font-mono mb-4">
+            About <span className="text-purple-400">Me</span>
+          </h2>
 
-        {/* Quick Info List */}
-        <motion.ul
-          className="space-y-4 text-gray-300 font-mono text-sm"
-          initial="hidden"
-          whileInView="visible"
-          transition={{ staggerChildren: 0.2 }}
-          variants={{
-            visible: { transition: { staggerChildren: 0.2 } },
-          }}
+          <p className="text-lg text-gray-300 leading-relaxed font-sans">
+            Hey! I’m <span className="text-white font-semibold">Ashish</span>, a
+            Full Stack Developer based in{" "}
+            <span className="text-white font-semibold">Hyderabad</span>.
+            <br />
+            <br />I recently graduated from{" "}
+            <span className="text-purple-400">Anurag University</span> with a
+            B.Tech in CSE and a CGPA of{" "}
+            <strong className="text-white">8.25</strong>.
+            <br />I enjoy building responsive UIs with React, writing scalable
+            APIs in Node.js, and learning new tech to build clean, modern web
+            apps.
+          </p>
+        </motion.div>
+
+        {/* Right: Info Cards */}
+        <motion.div
+          className="grid gap-4 text-sm font-mono"
+          initial={{ x: 50, opacity: 0 }}
+          whileInView={{ x: 0, opacity: 1 }}
+          transition={{ duration: 0.8, delay: 0.2 }}
         >
           {[
             { label: "📍 Location", value: "Hyderabad, India" },
             { label: "🎓 Degree", value: "B.Tech in CSE (2021–2025)" },
             { label: "📧 Email", value: "ashishreddymanne@gmail.com" },
-          ].map((item, index) => (
-            <motion.li
-              key={index}
-              className="border border-[#1a1a1a] bg-[#111] px-4 py-3 rounded-md hover:border-blue-500 transition duration-200"
-              variants={{
-                hidden: { opacity: 0, y: 20 },
-                visible: { opacity: 1, y: 0 },
-              }}
+          ].map((item, i) => (
+            <motion.div
+              key={i}
+              className="bg-[#111111] border border-purple-800/30 p-5 rounded-lg shadow-md hover:border-purple-500 hover:scale-[1.03] transition duration-300"
+              whileHover={{ scale: 1.04 }}
             >
-              <strong className="text-blue-400">{item.label}</strong>:{" "}
-              {item.value}
-            </motion.li>
+              <h4 className="text-purple-400 mb-1">{item.label}</h4>
+              <p className="text-gray-300">{item.value}</p>
+            </motion.div>
           ))}
-        </motion.ul>
+        </motion.div>
       </div>
     </section>
   );

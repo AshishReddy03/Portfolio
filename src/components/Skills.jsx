@@ -1,35 +1,46 @@
 import React from "react";
 import { motion } from "framer-motion";
+import FloatingStars from "./FloatingStars";
 
+// Import icons for categories
+import { FaReact, FaNodeJs, FaGitAlt, FaJava } from "react-icons/fa";
+import { SiMongodb, SiPostgresql } from "react-icons/si";
+
+// Category-wise tech stack (with icons only for section headings)
 const skills = [
   {
-    title: "Languages",
-    tech: ["Java", "Python", "JavaScript", "SQL"],
-  },
-  {
     title: "Frontend",
-    tech: ["HTML5", "CSS3", "Tailwind CSS", "React.js"],
+    icon: <FaReact className="text-[#61DBFB]" />,
+    items: ["React.js", "JavaScript", "Tailwind CSS", "HTML5", "CSS3"],
   },
   {
     title: "Backend",
-    tech: ["Spring Boot", "Node.js", "Express.js"],
+    icon: <FaNodeJs className="text-[#3C873A]" />,
+    items: ["Node.js", "Express.js", "Spring Boot"],
   },
   {
-    title: "Database",
-    tech: ["MongoDB", "MySQL"],
+    title: "Databases",
+    icon: <SiMongodb className="text-[#47A248]" />,
+    items: ["MongoDB", "MySQL", "PostgreSQL"],
   },
   {
     title: "Tools",
-    tech: ["VS Code", "Postman", "Git", "GitHub"],
+    icon: <FaGitAlt className="text-[#F05032]" />,
+    items: ["Git", "GitHub", "VS Code", "Figma", "Postman"],
+  },
+  {
+    title: "Languages",
+    icon: <FaJava className="text-[#007396]" />,
+    items: ["Java", "Python", "SQL"],
   },
 ];
 
-// floating animation for each card
+// Floating animation for cards
 const floatAnim = {
   animate: {
     y: [0, -6, 0, 6, 0],
     transition: {
-      duration: 4,
+      duration: 6,
       repeat: Infinity,
       ease: "easeInOut",
     },
@@ -38,40 +49,46 @@ const floatAnim = {
 
 const Skills = () => {
   return (
-    <section id="skills" className="bg-[#0d0d0d] text-white px-6 py-20">
-      <div className="max-w-6xl mx-auto">
+    <section
+      id="skills"
+      className="relative min-h-screen bg-[#0d0d0d] text-white py-20 px-6 overflow-hidden flex items-center"
+    >
+      {/* Background Effects */}
+      <FloatingStars />
+      <div className="absolute inset-0 bg-gradient-to-br from-purple-800/20 via-black to-black blur-2xl opacity-70 z-0" />
+
+      {/* Main Content */}
+      <div className="relative z-10 w-full max-w-6xl mx-auto text-center space-y-16">
         <motion.h2
-          className="text-3xl font-bold text-blue-400 font-mono mb-12 text-center"
-          initial={{ opacity: 0, scale: 0.95 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.5 }}
+          className="text-4xl md:text-5xl font-extrabold bg-gradient-to-r from-purple-400 to-pink-500 bg-clip-text text-transparent"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
         >
-          Skills
+          My Tech Stack
         </motion.h2>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {skills.map((group, i) => (
+        {/* Skill Cards */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10">
+          {skills.map((category, idx) => (
             <motion.div
-              key={i}
-              className="bg-[#141414] p-6 rounded-xl border border-[#2a2a2a] shadow-md"
-              variants={floatAnim}
-              animate="animate"
+              key={idx}
+              className="bg-[#121212]/70 border border-purple-700 rounded-xl p-6 shadow-lg backdrop-blur-md hover:shadow-purple-500/30 transition-all duration-300"
+              animate={floatAnim.animate}
             >
-              <h3 className="text-xl font-semibold text-blue-300 font-mono mb-4 border-b border-blue-600 pb-2">
-                {group.title}
-              </h3>
-              <div className="flex flex-wrap gap-3">
-                {group.tech.map((tech, j) => (
-                  <motion.span
-                    key={j}
-                    className="bg-[#1f1f1f] text-gray-200 text-sm font-mono px-3 py-1 rounded-full border border-gray-700 hover:border-blue-400 transition"
-                    whileHover={{ scale: 1.08 }}
-                    transition={{ type: "spring", stiffness: 300 }}
-                  >
-                    {tech}
-                  </motion.span>
-                ))}
+              <div className="flex items-center justify-center text-2xl font-bold text-purple-300 mb-4 font-mono gap-2">
+                {category.icon} {category.title}
               </div>
+              <ul className="flex flex-wrap justify-center gap-3 text-sm text-gray-300">
+                {category.items.map((skill, i) => (
+                  <li
+                    key={i}
+                    className="bg-[#1c1c1c] hover:bg-purple-700/30 px-3 py-1.5 rounded-md font-mono transition"
+                  >
+                    {skill}
+                  </li>
+                ))}
+              </ul>
             </motion.div>
           ))}
         </div>
