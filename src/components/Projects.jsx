@@ -22,7 +22,7 @@ const projects = [
       "Developed a full-stack chat app with real-time messaging using Socket.IO. Features include typing indicators, live user count, smooth animations with Framer Motion, and clean UI with Tailwind CSS. Frontend deployed on Vercel and backend on Render, kept alive 24/7 using UptimeRobot.",
     tech: ["React.js", "Tailwind CSS", "Socket.IO", "Node.js", "Express.js"],
     github: "https://github.com/AshishReddy03/ChatApplication", // <-- ADD THIS
-    link: "https://chat-application-hai56v1lj-ashishs-projects-2eb3e656.vercel.app/",
+    link: "https://chat-application-seven-gray.vercel.app/",
     image: chat, // Add your preview image here
   },
 ];
