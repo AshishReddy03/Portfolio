@@ -1,7 +1,8 @@
 import React from "react";
 import { motion } from "framer-motion";
+import Tilt from "react-parallax-tilt";
 
-// Floating stars (glowing dots)
+// Floating stars
 const FloatingStars = () =>
   Array.from({ length: 40 }, (_, i) => (
     <motion.span
@@ -25,17 +26,17 @@ const FloatingStars = () =>
     />
   ));
 
-// Background floating blobs
+// Background blobs
 const BackgroundBlobs = () => (
   <>
     <motion.div
-      className="absolute w-72 h-72 bg-purple-600/20 rounded-full blur-3xl top-[10%] left-[5%] z-0"
-      animate={{ y: [0, 20, 0], opacity: [0.4, 0.7, 0.4] }}
+      className="absolute w-80 h-80 bg-purple-600/30 rounded-full blur-3xl top-[10%] left-[5%] z-0"
+      animate={{ y: [0, 20, 0] }}
       transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
     />
     <motion.div
-      className="absolute w-96 h-96 bg-blue-500/10 rounded-full blur-2xl top-[60%] right-[5%] z-0"
-      animate={{ y: [0, -30, 0], opacity: [0.4, 0.7, 0.4] }}
+      className="absolute w-[28rem] h-[28rem] bg-indigo-400/20 rounded-full blur-2xl bottom-[5%] right-[5%] z-0"
+      animate={{ y: [0, -30, 0] }}
       transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
     />
   </>
@@ -47,7 +48,7 @@ const About = () => {
       id="about"
       className="relative min-h-screen px-6 py-24 bg-gradient-to-b from-[#0d0d0d] to-black text-white flex items-center overflow-hidden"
     >
-      {/* Background stars and blobs */}
+      {/* Background */}
       <FloatingStars />
       <BackgroundBlobs />
 
@@ -61,7 +62,6 @@ const About = () => {
           <h2 className="text-4xl font-bold text-white font-mono mb-4">
             About <span className="text-purple-400">Me</span>
           </h2>
-
           <p className="text-lg text-gray-300 leading-relaxed font-sans">
             Hey! I’m <span className="text-white font-semibold">Ashish</span>, a
             Full Stack Developer based in{" "}
@@ -77,9 +77,9 @@ const About = () => {
           </p>
         </motion.div>
 
-        {/* Right: Info Cards */}
+        {/* Right: 3D Tilt Cards */}
         <motion.div
-          className="grid gap-4 text-sm font-mono"
+          className="grid gap-6 text-sm font-mono"
           initial={{ x: 50, opacity: 0 }}
           whileInView={{ x: 0, opacity: 1 }}
           transition={{ duration: 0.8, delay: 0.2 }}
@@ -89,14 +89,28 @@ const About = () => {
             { label: "🎓 Degree", value: "B.Tech in CSE (2021–2025)" },
             { label: "📧 Email", value: "ashishreddymanne@gmail.com" },
           ].map((item, i) => (
-            <motion.div
+            <Tilt
               key={i}
-              className="bg-[#111111] border border-purple-800/30 p-5 rounded-lg shadow-md hover:border-purple-500 hover:scale-[1.03] transition duration-300"
-              whileHover={{ scale: 1.04 }}
+              tiltMaxAngleX={10}
+              tiltMaxAngleY={10}
+              transitionSpeed={2500}
+              glareEnable={true}
+              glareMaxOpacity={0.15}
+              glareColor="#ffffff"
+              className="hover:scale-[1.02] transition-transform"
             >
-              <h4 className="text-purple-400 mb-1">{item.label}</h4>
-              <p className="text-gray-300">{item.value}</p>
-            </motion.div>
+              <motion.div
+                className="relative bg-[#111111] border border-purple-800/40 p-5 rounded-xl shadow-md hover:border-purple-500/60"
+                whileHover={{
+                  scale: 1.04,
+                }}
+              >
+                {/* Glowing ring behind card */}
+                <div className="absolute -inset-1 rounded-xl bg-purple-700 opacity-10 blur-2xl z-[-1]" />
+                <h4 className="text-purple-400 mb-1">{item.label}</h4>
+                <p className="text-gray-300">{item.value}</p>
+              </motion.div>
+            </Tilt>
           ))}
         </motion.div>
       </div>
