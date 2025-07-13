@@ -20,7 +20,7 @@ const ScrollToTop = () => {
     visible && (
       <button
         onClick={scrollToTop}
-        className="fixed bottom-6 right-6 p-3 rounded-full bg-blue-600 hover:bg-blue-700 text-white shadow-lg z-50"
+        className="fixed bottom-6 right-6 p-3 rounded-full bg-purple-500 hover:bg-purple-700 text-white shadow-lg z-50"
       >
         <FaArrowUp />
       </button>
