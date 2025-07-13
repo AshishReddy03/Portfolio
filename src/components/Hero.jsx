@@ -97,48 +97,32 @@ const Hero = () => {
           tiltMaxAngleX={8}
           tiltMaxAngleY={8}
           transitionSpeed={2000}
-          className="relative z-10 w-full max-w-4xl px-20"
+          className="relative z-10 w-full px-2 max-w-[95vw] sm:max-w-[90vw] md:max-w-4xl"
         >
           <motion.div
-            className="flex flex-col md:flex-row items-center gap-6 border border-purple-700/50 rounded-xl px-6 py-4 backdrop-blur-xl bg-transparent shadow-[0_0_35px_#a855f7]"
+            className="flex flex-row items-center justify-between gap-4 border border-purple-700/50 rounded-xl px-4 py-4 backdrop-blur-xl bg-transparent shadow-[0_0_35px_#a855f7] w-full max-w-4xl"
             initial={{ scale: 0.8, opacity: 0, filter: "blur(20px)" }}
             animate={{ scale: 1, opacity: 1, filter: "blur(0px)" }}
-            transition={{
-              duration: 1.2,
-              ease: "easeOut",
-              delay: 0.1,
-            }}
+            transition={{ duration: 1.2, ease: "easeOut", delay: 0.1 }}
             whileHover={{
               scale: 1.015,
               boxShadow: "0 0 50px rgba(168, 85, 247, 0.6)",
             }}
           >
-            {/* 🤖 Left: Previous robot model inside card */}
-            <motion.div
-              initial={{ x: -100, opacity: 0 }}
-              animate={{ x: 0, opacity: 1 }}
-              transition={{ delay: 0.6, duration: 1 }}
-              className="w-full md:w-1/2 h-[220px] md:h-[280px] rounded-lg overflow-hidden"
-            >
+            {/* 🤖 Robot Model */}
+            <div className="w-[45%] min-w-[120px] max-w-[180px] h-[160px] sm:h-[200px] md:h-[250px] rounded-lg overflow-hidden">
               <Spline scene="https://prod.spline.design/bkeTrUKJndIaa1ri/scene.splinecode" />
-            </motion.div>
+            </div>
 
-            {/* 📝 Right: Text */}
-            <motion.div
-              className="w-full md:w-1/2"
-              initial={{ x: 100, opacity: 0 }}
-              animate={{ x: 0, opacity: 1 }}
-              transition={{ delay: 0.8, duration: 1 }}
-            >
-              <p className="text-md text-purple-500 font-mono mb-2">
-                {`> Hello, I'm`}
-              </p>
+            {/* 📝 Text Section */}
+            <div className="w-[55%] flex flex-col justify-center text-left space-y-2">
+              <p className="text-xs sm:text-sm text-purple-500 font-mono">{`> Hello, I'm`}</p>
 
-              <h1 className="text-4xl md:text-5xl font-bold font-mono text-white">
+              <h1 className="text-xl sm:text-2xl md:text-3xl font-bold font-mono text-white leading-tight">
                 Ashish Reddy Manne
               </h1>
 
-              <div className="mt-2 text-xl md:text-2xl font-mono text-gray-300">
+              <div className="text-xs sm:text-sm md:text-base font-mono text-gray-300">
                 <TypeAnimation
                   sequence={[
                     "Full Stack Developer",
@@ -157,10 +141,10 @@ const Hero = () => {
                 />
               </div>
 
-              <div className="mt-6 flex gap-4">
+              <div className="mt-3 flex flex-wrap gap-3">
                 <a
                   href="#projects"
-                  className="px-5 py-2 bg-purple-700 text-white rounded-md font-mono hover:bg-purple-800 transition"
+                  className="px-4 py-1.5 bg-purple-700 text-white rounded-md font-mono text-xs sm:text-sm hover:bg-purple-800 transition"
                 >
                   View Projects
                 </a>
@@ -169,12 +153,12 @@ const Hero = () => {
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  <button className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 font-mono">
+                  <button className="bg-green-600 text-white px-4 py-1.5 rounded font-mono text-xs sm:text-sm hover:bg-green-700">
                     View Resume
                   </button>
                 </a>
               </div>
-            </motion.div>
+            </div>
           </motion.div>
         </Tilt>
       )}
