@@ -82,7 +82,7 @@ const Hero = () => {
       {/* 🌌 Background blur + floating elements */}
       <FloatingStars />
       <FloatingDots />
-      {isModelLoaded && <FloatingCode />}
+      {isModelLoaded && !isMobile && <FloatingCode />}
       <div className="absolute inset-0 bg-gradient-to-br from-purple-800/30 via-black to-black blur-3xl opacity-70 z-0" />
 
       {/* ✨ Hero content card */}
