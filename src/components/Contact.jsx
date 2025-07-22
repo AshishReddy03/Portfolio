@@ -30,6 +30,20 @@ const contactDetails = [
     desc: "Let’s network professionally and stay in touch through LinkedIn.",
   },
 ];
+const BackgroundBlobs = () => (
+  <>
+    <motion.div
+      className="absolute w-80 h-80 bg-purple-600/30 rounded-full blur-3xl top-[10%] left-[5%] z-0"
+      animate={{ y: [0, 20, 0] }}
+      transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
+    />
+    <motion.div
+      className="absolute w-[28rem] h-[28rem] bg-indigo-400/20 rounded-full blur-2xl bottom-[5%] right-[5%] z-0"
+      animate={{ y: [0, -30, 0] }}
+      transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
+    />
+  </>
+);
 
 const Contact = () => {
   return (
@@ -37,6 +51,7 @@ const Contact = () => {
       id="contact"
       className="relative px-6 py-20 bg-[#0d0d0d] text-white overflow-hidden"
     >
+      <BackgroundBlobs />
       <FloatingStars />
       <div className="absolute inset-0 bg-gradient-to-br from-purple-900/10 to-black blur-3xl z-0" />
 

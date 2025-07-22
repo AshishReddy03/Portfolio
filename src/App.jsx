@@ -1,4 +1,5 @@
 // Main App.jsx
+import FloatingNavbar from "./components/FloatingNavbar";
 import React from "react";
 import { BrowserRouter as Router } from "react-router-dom";
 import Navbar from "./components/Navbar";
@@ -22,6 +23,7 @@ const App = () => {
           <Projects />
           <Contact />
         </main>
+        <FloatingNavbar />
         <Footer />
         <ScrollToTop />
       </div>
@@ -30,6 +32,3 @@ const App = () => {
 };
 
 export default App;
-
-
-

@@ -36,6 +36,20 @@ const cardVariants = {
     transition: { delay: i * 0.2, duration: 0.8, ease: "easeOut" },
   }),
 };
+const BackgroundBlobs = () => (
+  <>
+    <motion.div
+      className="absolute w-80 h-80 bg-purple-600/30 rounded-full blur-3xl top-[10%] left-[5%] z-0"
+      animate={{ y: [0, 20, 0] }}
+      transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
+    />
+    <motion.div
+      className="absolute w-[28rem] h-[28rem] bg-indigo-400/20 rounded-full blur-2xl bottom-[5%] right-[5%] z-0"
+      animate={{ y: [0, -30, 0] }}
+      transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
+    />
+  </>
+);
 
 const Projects = () => {
   return (
@@ -44,6 +58,7 @@ const Projects = () => {
       className="relative min-h-screen px-6 py-20 bg-[#0d0d0d] text-white overflow-hidden"
     >
       {/* Starry background and gradient blur */}
+      <BackgroundBlobs />
       <FloatingStars />
       <div className="absolute inset-0 bg-gradient-to-br from-purple-900/10 to-black blur-3xl z-0 pointer-events-none" />
 
@@ -70,60 +85,63 @@ const Projects = () => {
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true }}
-              className="relative block bg-[#121212]/60 border border-purple-700/40 rounded-xl p-6 shadow-md backdrop-blur-md transition-all duration-300 hover:-translate-y-2 hover:shadow-purple-600/40 group min-h-[450px]"
+              className="group relative flex flex-col overflow-hidden rounded-xl bg-[#1a1a1a] border border-purple-700/30 shadow-md hover:shadow-purple-600/30 transition-all duration-300 hover:-translate-y-2 backdrop-blur-md"
             >
-              {/* Hover Glow */}
-              <div className="absolute -inset-px rounded-xl bg-gradient-to-r from-purple-600 to-pink-600 opacity-0 group-hover:opacity-10 blur-sm transition pointer-events-none" />
-
-              {/* Image Preview */}
+              {/* Project Image Banner */}
               {proj.image && (
                 <img
                   src={proj.image}
                   alt={`${proj.title} Preview`}
                   loading="lazy"
-                  className="rounded-md w-full h-48 object-cover object-top border border-purple-800/30 shadow-inner mb-3"
+                  className="h-56 w-full object-cover object-top border-b border-purple-800/30"
                 />
               )}
 
-              {/* Title */}
-              <h3 className="text-xl font-bold text-purple-300 font-mono mb-2">
-                {proj.title}
-              </h3>
+              {/* Content Block */}
+              <div className="p-6 flex flex-col gap-4">
+                {/* Project Title */}
+                <h3 className="text-2xl font-bold text-purple-300 font-mono group-hover:text-pink-400 transition">
+                  {proj.title}
+                </h3>
 
-              {/* Description */}
-              <p className="text-gray-300 text-sm mb-4 leading-relaxed font-sans">
-                {proj.description}
-              </p>
+                {/* Description */}
+                <p className="text-gray-300 text-sm leading-relaxed font-sans">
+                  {proj.description}
+                </p>
 
-              {/* Tech Stack */}
-              <div className="flex flex-wrap gap-2 mb-2">
-                {proj.tech.map((tech, index) => (
-                  <span
-                    key={index}
-                    className="bg-[#1f1f1f] text-gray-300 border border-gray-700 px-2 py-1 rounded-full text-xs font-mono hover:border-purple-500 transition"
-                  >
-                    {tech}
+                {/* Tech Stack Tags */}
+                <div className="flex flex-wrap gap-2">
+                  {proj.tech.map((tech, index) => (
+                    <span
+                      key={index}
+                      className="bg-[#222] text-gray-300 border border-gray-700 px-3 py-1 rounded-full text-xs font-mono hover:border-purple-500 transition"
+                    >
+                      {tech}
+                    </span>
+                  ))}
+                </div>
+
+                {/* Footer Section: View Project + GitHub */}
+                <div className="flex justify-between items-center pt-4 border-t border-purple-800/20 mt-auto">
+                  <span className="text-sm text-purple-400 font-mono underline underline-offset-2 group-hover:text-pink-400 transition">
+                    View Project →
                   </span>
-                ))}
-              </div>
 
-              {/* Link Text */}
-              <div className="flex justify-between items-center mt-4">
-                <span className="text-sm text-purple-400 font-mono underline underline-offset-2 group-hover:text-pink-400 transition">
-                  View Project →
-                </span>
-
-                {proj.github && (
-                  <a
-                    href={proj.github}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-gray-300 hover:text-white transition"
-                    title="View Source on GitHub"
-                  >
-                    <FaGithub className="text-xl" size={40} />
-                  </a>
-                )}
+                  {proj.github && (
+                    <a
+                      href={proj.github}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-gray-300 hover:text-white transition"
+                      title="View Source on GitHub"
+                    >
+                      <FaGithub
+                        size={28}
+                        className="transition-transform group-hover:scale-110"
+                      />
+                    </a>
+                  )}
+                </div>
               </div>
             </motion.a>
           ))}
